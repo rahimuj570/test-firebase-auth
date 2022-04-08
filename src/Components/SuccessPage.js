@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { auth } from "../firebase.int";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,9 @@ const SuccessPage = () => {
       });
   };
   const navigate = useNavigate();
+  const loginRedirect = () => navigate("/login");
 
-  return (
+  return user.uid ? (
     <div className=" my-3 text-center">
       {user.photoURL && <img src={user.photoURL} alt="" />}
 
@@ -52,6 +53,13 @@ const SuccessPage = () => {
         Log Out
       </button>
     </div>
+  ) : (
+    <>
+      <h1>You Are not Logged In</h1>
+      <button onClick={loginRedirect} className="text-white btn bg-primary">
+        Please Log In
+      </button>
+    </>
   );
 };
 
