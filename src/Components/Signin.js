@@ -5,7 +5,7 @@ import ContinueWith from "./ContinueWith";
 const Signin = () => {
   return (
     <div className="m-5  shadow">
-      <div class="container">
+      <div className="container">
         <div className="row">
           <div className="col-md-8">
             <Form className=" mx-auto p-5">
