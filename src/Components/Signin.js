@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import ContinueWith from "./ContinueWith";
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [checkBox, setCheckBox] = useState(false);
+  const [finalData, setFinalData] = useState({});
+  const [number, setNumber] = useState(0);
+  useEffect(() => {
+    let data = {};
+    data.name = name;
+    data.password = password;
+    data.email = email;
+    data.number = number;
+    setFinalData(data);
+    console.log(finalData);
+  }, [number]);
+  const readyData = () => {
+    let data = {};
+    data.name = name;
+    data.password = password;
+    data.email = email;
+    data.number = number;
+    setFinalData(data);
+    console.log(finalData);
+  };
   return (
     <div className="m-5  shadow">
       <div className="container">
         <div className="row">
           <div className="col-md-8">
-            <Form className=" mx-auto p-5">
+            <Form onSubmit={(e) => e.preventDefault()} className=" mx-auto p-5">
               <Row form>
                 <Col md={6}>
                   <FormGroup>
@@ -16,6 +40,7 @@ const Signin = () => {
                       Email
                     </Label>
                     <Input
+                      onBlur={(e) => setEmail(e.target.value)}
                       required
                       id="exampleEmail"
                       name="email"
@@ -30,6 +55,7 @@ const Signin = () => {
                       Password
                     </Label>
                     <Input
+                      onBlur={(e) => setPassword(e.target.value)}
                       required
                       id="examplePassword"
                       name="password"
@@ -42,6 +68,7 @@ const Signin = () => {
                       Full Name
                     </Label>
                     <Input
+                      onBlur={(e) => setName(e.target.value)}
                       required
                       id="exampleFull NAme"
                       name="Full NAme"
@@ -53,6 +80,7 @@ const Signin = () => {
                       Mobile Number
                     </Label>
                     <Input
+                      onBlur={(e) => setNumber(e.target.value)}
                       required
                       id="exampleAddress2"
                       name="address2"
@@ -61,6 +89,7 @@ const Signin = () => {
                   </FormGroup>
                   <FormGroup check>
                     <Input
+                      onClick={(e) => setCheckBox(e.target.validity.valid)}
                       required
                       id="exampleCheck"
                       name="check"
@@ -72,7 +101,16 @@ const Signin = () => {
                   </FormGroup>
                 </Col>
               </Row>
-              <Button className="mt-3">Sign in</Button> <br />
+              {checkBox ? (
+                <Button onClick={readyData} className="mt-3">
+                  Sign Up
+                </Button>
+              ) : (
+                <Button disabled onClick={readyData} className="mt-3">
+                  Sign Up
+                </Button>
+              )}
+              <br />
             </Form>
           </div>
           <div className="col-md-4">

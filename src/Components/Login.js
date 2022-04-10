@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import ContinueWith from "./ContinueWith";
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="container">
@@ -33,7 +35,10 @@ const Login = () => {
                   type="password"
                 />
               </FormGroup>
-              <Button className="mt-3 ">Submit</Button>
+              <Button className="mt-3 ">Log In</Button> <br />
+              <Button onClick={() => navigate("/")} className="bg-info mt-2 ">
+                Registered with Email
+              </Button>
             </Form>
           </div>
           <div className="col-md-4">
